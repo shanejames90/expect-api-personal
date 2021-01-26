@@ -53,10 +53,10 @@ router.get('/purchases', requireToken, (req, res, next) => {
 router.get('/purchases/:id', requireToken, (req, res, next) => {
   const id = req.params.id
 
-  Purchase.find({ owner: req.user._id, _id: id })
+  Purchase.findOne({ _id: id })
     .then(handle404)
     // if `findById` is successful, respond with 200 and "purchase" JSON
-    .then(task => res.status(200).json({ task: task }))
+    .then(purchase => res.status(200).json({ purchase: purchase.toObject() }))
     // if an error occurs, pass it to the handler
     .catch(next)
 })
@@ -74,7 +74,8 @@ router.patch('/purchases/:id', requireToken, (req, res, next) => {
   Purchase.findOne({ _id: id })
     .then(errors.handle404)
     .then(purchase => {
-      purchase.updateOne(purchaseData)
+      requireOwnership(req, purchase)
+      return purchase.updateOne(purchaseData)
     })
 
     // respond with no content and status 200
@@ -83,6 +84,7 @@ router.patch('/purchases/:id', requireToken, (req, res, next) => {
     .catch(next)
 })
 
+// DESTROY
 router.delete('/purchase/:id', requireToken, (req, res, next) => {
   Purchase.findOne({ _id: req.params.id })
     .then(handle404)

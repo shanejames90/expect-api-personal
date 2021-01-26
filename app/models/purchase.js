@@ -1,7 +1,7 @@
 const mongoose = require('mongoose')
 
 const purchaseSchema = new mongoose.Schema({
-  name: {
+  location: {
     type: String,
     required: true
   },
