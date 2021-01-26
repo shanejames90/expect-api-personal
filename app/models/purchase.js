@@ -24,7 +24,18 @@ const purchaseSchema = new mongoose.Schema({
   }
 }, {
   timestamps: true,
-  toObject: { virtuals: true },
+  toObject: {
+    // remove `hashedPassword` field when we call `.toObject`
+    transform: (_doc, purchase) => {
+      return {
+        id: purchase._id,
+        location: purchase.location,
+        date: purchase.date,
+        price: purchase.date,
+        comment: purchase.comment
+      }
+    }
+  },
   toJSON: { virtuals: true }
 })
 
