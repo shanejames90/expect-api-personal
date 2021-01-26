@@ -1,8 +1,8 @@
 const mongoose = require('mongoose')
 
 const purchaseSchema = new mongoose.Schema({
-  location: {
-    name: String,
+  name: {
+    type: String,
     required: true
   },
   date: {
@@ -35,8 +35,7 @@ const purchaseSchema = new mongoose.Schema({
         comment: purchase.comment
       }
     }
-  },
-  toJSON: { virtuals: true }
+  }
 })
 
 module.exports = mongoose.model('Purchase', purchaseSchema)
