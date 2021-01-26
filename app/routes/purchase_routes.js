@@ -85,7 +85,7 @@ router.patch('/purchases/:id', requireToken, (req, res, next) => {
 })
 
 // DESTROY
-router.delete('/purchase/:id', requireToken, (req, res, next) => {
+router.delete('/purchases/:id', requireToken, (req, res, next) => {
   Purchase.findOne({ _id: req.params.id })
     .then(handle404)
     .then(purchase => {
