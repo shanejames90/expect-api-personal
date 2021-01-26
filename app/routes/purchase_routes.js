@@ -7,8 +7,6 @@ const errors = require('../../lib/custom_errors')
 
 const handle404 = errors.handle404
 
-const BadParamsError = errors.BadParamsError
-
 const Purchase = require('../models/purchase')
 
 // passing this as a second argument to `router.<verb>` will make it
