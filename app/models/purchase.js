@@ -31,7 +31,7 @@ const purchaseSchema = new mongoose.Schema({
         id: purchase._id,
         location: purchase.location,
         date: purchase.date,
-        price: purchase.date,
+        price: purchase.price,
         comment: purchase.comment
       }
     }
