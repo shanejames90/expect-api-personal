@@ -20,7 +20,7 @@ const requireOwnership = errors.requireOwnership
 const router = express.Router()
 
 //
-// POST /purchase
+// POST /purchases
 router.post('/purchases', requireToken, (req, res, next) => {
   // set owner of new purchase to be the current owner
   req.body.purchase.owner = req.user.id
@@ -79,7 +79,8 @@ router.patch('/purchases/:id', requireToken, (req, res, next) => {
     })
 
     // respond with no content and status 200
-    .then(() => res.sendStatus(204))
+    // .then(() => res.sendStatus(204))
+    .then(purchase => res.status(204).json({ comment: purchase.comment }))
     // pass any errors along to the error handler
     .catch(next)
 })
@@ -92,7 +93,7 @@ router.delete('/purchases/:id', requireToken, (req, res, next) => {
       // throw an error if current user doesn't own `purchase`
       requireOwnership(req, purchase)
       // delete the purchase ONLY IF the above didn't throw
-      purchase.deleteOne()
+      return purchase.updateOne({ comment: '' })
     })
     // send back 204 and no content if the deletion succeeded
     .then(() => res.sendStatus(204))

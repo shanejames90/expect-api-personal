@@ -30,8 +30,8 @@ const purchaseSchema = new mongoose.Schema({
       return {
         id: purchase._id,
         location: purchase.location,
-        date: purchase.date,
-        price: purchase.date,
+        date: purchase.date.toDateString(),
+        price: purchase.price,
         comment: purchase.comment
       }
     }
