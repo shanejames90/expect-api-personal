@@ -11,8 +11,11 @@ In a world where travel is drastically changing, Expect rises to the occasion to
 * Axios
 
 ### API Documentation #
+[Expect-Client-Deployed](https://callback-kings.github.io/expect-client/#/)
 
-[Heroku](https://devcenter.heroku.com/categories/reference)
+[Expect-Client-Repo](https://github.com/Callback-Kings/expect-client)
+
+[Heroku Deployed](https://safe-dawn-20664.herokuapp.com/)
 
 ### Planning and Organization #
 Planning was resourced by the use of morning scrum and a project Kanban board. Agile issues were opened on the team board, and they were assigned to team members to complete.  When a team member had an engineering challenge it would get posted to the project board. Challenges were handled competitively; we collectively worked on the same challenge and the member that engineered the best solution had their code implemented.
@@ -30,6 +33,27 @@ Organizational method of the project:
 + Inline styling
 + Debug
 + Final Touches
+
+### Routes #
+
+| METHOD    | Endpoint         | Component | `AuthenticatedRoute`? |
+|------------|------------------|-------------------|-------|
+| POST    | `/sign-up`       | `SignUp`    | No |
+|   POST  | `/sign-in`       | `SignIn`    | No |
+| PATCH    | `/change-password` | `ChangePassword`  | Yes |
+| DELETE    | `/sign-out`        | `SignOut`   | Yes |
+
+
+| METHOD    | Endpoint         | Component | `AuthenticatedRoute`? |
+|------------|------------------|-------------------|-------|
+| GET    | `/`       | `HOME`    | No |
+| GET   | `/show-tours`       | `ShowTours`    | Yes|
+| POST    | `/purchases/`        | `ShowPurchase`   | Yes |
+| GET   | `/purchases` | `IndexPurchases`  | Yes |
+| GET    | `/purchases/:id`        | `ShowPurchase`   | Yes |
+| PATCH    | `/purchases/:id`        | `UpdatePurchase`   | Yes |
+| DELETE    | `/purchases/:id`        | `UpdatePurchase`   | Yes |
+
 
 ### ERD #
 
