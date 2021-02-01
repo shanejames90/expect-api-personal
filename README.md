@@ -33,14 +33,14 @@ Organizational method of the project:
 
 ### ERD #
 
-![Expect ERD](./lib/public/Expect_ERD.png "Expect_ERD")
+![Expect ERD](./lib/Expect_ERD.png "Expect_ERD")
 
 ### User Stories #
 
-![Expect User Stories](./lib/public/Expect_User_Stories.png "Expect_User_Stories")
+![Expect User Stories](./lib/Expect_User_Stories.png "Expect_User_Stories")
 
 ### Wireframes #
-![Expect Wireframe](./lib/public/Expect_Wireframe.png "Expect_Wireframe")
+![Expect Wireframe](./lib/Expect_Wireframe.png "Expect_Wireframe")
 
 
 ### Future Plans, Problems to solve #
