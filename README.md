@@ -9,7 +9,7 @@ In a world where travel is drastically changing, Expect rises to the occasion to
 * Javascript
 * React-Bootstrap
 * Axios
-* JWT(Jason Web Token)
+* JWT(JSON Web Token)
 
 ### API Documentation #
 [Expect-Client-Deployed](https://callback-kings.github.io/expect-client/#/)
