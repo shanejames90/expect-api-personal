@@ -1,7 +1,10 @@
 // require necessary NPM packages
 const express = require('express')
+
 const mongoose = require('mongoose')
 const cors = require('cors')
+const Stripe = require('stripe')
+const stripe = Stripe('pk_test_51IGG1MDasmd3qX8mMpTrcfFUbG2xcShhNCfipryyGy67xV2rxVZqWbpDKdaeKeOcbnj6uXURGMb99uTveO42H3tz00K8CLS87d')
 
 // require route files
 const purchaseRoutes = require('./app/routes/purchase_routes')
@@ -63,6 +66,33 @@ app.use(userRoutes)
 // note that this comes after the route middlewares, because it needs to be
 // passed any error messages from them
 app.use(errorHandler)
+
+app.use(express.static('.'))
+
+const domain = 'http://localhost:7165/checkout'
+
+// this creates a stripe session(checkout session for client side)
+app.post('/create-checkout-session', async (req, res) => {
+  const session = await stripe.checkout.sessions.create({
+    payment_method_types: ['card'],
+    line_items: [
+      {
+        price_data: {
+          currency: 'usd',
+          product_data: {
+            name: 'tour'
+          },
+          unit_amount: 2000
+        },
+        quantity: 1
+      }
+    ],
+    mode: 'payment',
+    success_url: `${domain}?success=true`,
+    cancel_url: `${domain}?canceled=true`
+  })
+  res.json({ id: session.id })
+})
 
 // run API on designated port (4741 in this case)
 app.listen(port, () => {
