@@ -3,8 +3,8 @@ const express = require('express')
 
 const mongoose = require('mongoose')
 const cors = require('cors')
-// const Stripe = require('stripe')
-// const stripe = Stripe('pk_test_51IGG1MDasmd3qX8mMpTrcfFUbG2xcShhNCfipryyGy67xV2rxVZqWbpDKdaeKeOcbnj6uXURGMb99uTveO42H3tz00K8CLS87d')
+const Stripe = require('stripe')
+const stripe = Stripe('pk_test_51IGG1MDasmd3qX8mMpTrcfFUbG2xcShhNCfipryyGy67xV2rxVZqWbpDKdaeKeOcbnj6uXURGMb99uTveO42H3tz00K8CLS87d')
 
 // require route files
 const purchaseRoutes = require('./app/routes/purchase_routes')
@@ -40,7 +40,7 @@ const app = express()
 
 // set CORS headers on response from this API using the `cors` NPM package
 // `CLIENT_ORIGIN` is an environment variable that will be set on Heroku
-app.use(cors({ origin: process.env.CLIENT_ORIGIN || `http://localhost:${clientDevPort}` }, {stripeKey: process.env.STRIPE_KEYS}))
+app.use(cors({ origin: process.env.CLIENT_ORIGIN || `http://localhost:${clientDevPort}` || stripe }))
 
 // define port for API to run on
 const port = process.env.PORT || serverDevPort
@@ -69,30 +69,30 @@ app.use(errorHandler)
 
 app.use(express.static('.'))
 
-// const domain = 'http://localhost:7165/checkout'
+const domain = 'http://localhost:7165/checkout'
 
 // this creates a stripe session(checkout session for client side)
-// app.post('/create-checkout-session', async (req, res) => {
-//   const session = await stripe.checkout.sessions.create({
-//     payment_method_types: ['card'],
-//     line_items: [
-//       {
-//         price_data: {
-//           currency: 'usd',
-//           product_data: {
-//             name: 'tour'
-//           },
-//           unit_amount: 2000
-//         },
-//         quantity: 1
-//       }
-//     ],
-//     mode: 'payment',
-//     success_url: `${domain}?success=true`,
-//     cancel_url: `${domain}?canceled=true`
-//   })
-//   res.json({ id: session.id })
-// })
+app.post('/create-checkout-session', async (req, res) => {
+  const session = await stripe.checkout.sessions.create({
+    payment_method_types: ['card'],
+    line_items: [
+      {
+        price_data: {
+          currency: 'usd',
+          product_data: {
+            name: 'tour'
+          },
+          unit_amount: 2000
+        },
+        quantity: 1
+      }
+    ],
+    mode: 'payment',
+    success_url: `${domain}?success=true`,
+    cancel_url: `${domain}?canceled=true`
+  })
+  res.json({ id: session.id })
+})
 
 // run API on designated port (4741 in this case)
 app.listen(port, () => {
