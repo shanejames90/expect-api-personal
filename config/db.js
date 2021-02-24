@@ -1,7 +1,7 @@
 'use strict'
 
 // creating a base name for the mongodb
-const mongooseBaseName = 'expect-api'
+const mongooseBaseName = 'expect-api-personal'
 
 // create the mongodb uri for development and test
 const database = {
